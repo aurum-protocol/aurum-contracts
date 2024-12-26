@@ -4,6 +4,9 @@ out = "out"
 libs = ["lib"]
 evm_version = "Cancun"
 
+[fmt]
+int_types = "short"
+
 [rpc_endpoints]
 sonic = "${SONIC_RPC_URL}"
 
