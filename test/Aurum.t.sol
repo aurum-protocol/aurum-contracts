@@ -16,4 +16,20 @@ contract AurumTest is Test {
         token.approve(address(this), 10 ** 18);
         token.transferFrom(MSIG, address(this), 10 ** 18);
     }
+
+    function test_mint() public {
+        token = new Aurum(MSIG);
+        assertEq(token.balanceOf(MSIG), 3_000_000 * 10 ** 18);
+        vm.expectRevert();
+        token.mint(address(this), 1);
+        vm.startPrank(MSIG);
+        token.mint(address(this), 1);
+        assertEq(token.balanceOf(address(this)), 1);
+        vm.expectRevert();
+        token.mint(address(this), 17_000_000 * 10 ** 18);
+        token.mint(address(this), 17_000_000 * 10 ** 18 - 1);
+        vm.expectRevert();
+        token.mint(address(this), 1);
+        vm.stopPrank();
+    }
 }
