@@ -8,7 +8,7 @@ contract DeployAurum is Script {
     address public constant TREASURY = 0x1dF49E1211c2fd664b3D7A7480230E36f157e328;
 
     function run() public {
-        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
+        uint deployerPrivateKey = vm.envUint("PRIVATE_KEY");
         vm.startBroadcast(deployerPrivateKey);
         new Aurum(TREASURY);
         vm.stopBroadcast();
