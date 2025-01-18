@@ -22,4 +22,26 @@ contract AggregatorAdapterTest is Test {
         assertEq(adapter.decimals(), 8);
         assertEq(adapter.latestAnswer(), 100029978);
     }
+
+    function test_aggregator_negative_price() public {
+        MockAggregator source = new MockAggregator(18, -100029978e10);
+        AggregatorAdapter adapter = new AggregatorAdapter(address(source));
+        assertEq(adapter.latestAnswer(), -100029978);
+    }
+
+    function test_aggregator_zero_price() public {
+        MockAggregator source = new MockAggregator(18, 0);
+        AggregatorAdapter adapter = new AggregatorAdapter(address(source));
+        assertEq(adapter.latestAnswer(), 0);
+    }
+
+    function test_aggregator_timestamp_sync() public {
+        MockAggregator source = new MockAggregator(18, 100029978e10);
+        AggregatorAdapter adapter = new AggregatorAdapter(address(source));
+        assertEq(adapter.latestTimestamp(), source.latestTimestamp());
+    }
+
+    function testFail_aggregator_invalid_source() public {
+        AggregatorAdapter adapter = new AggregatorAdapter(address(0));
+    }
 }
