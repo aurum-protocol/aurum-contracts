@@ -14,6 +14,10 @@ forge test
 forge coverage
 ```
 
+## Real deployments
+
+**AggregatorUsdStub** | 0xd5ec85185c02aba0b0d93f1236f12e2a6d814d66
+
 ## Sonic deployments
 
 **Aurum** | 0x7f144f8691cba3d2efd8e5bcf042f9303ee31a46 [sonicscan](https://sonicscan.org/address/0x7f144f8691cba3d2efd8e5bcf042f9303ee31a46)
